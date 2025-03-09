@@ -1,0 +1,70 @@
+{
+  "id": "io.remixgame.battlemaster",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "22.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "/app/bin/battlemaster.sh",
+  "finish-args": [
+	"--socket=pulseaudio",
+	"--socket=x11",
+    "--share=network",
+    "--filesystem=host"
+  ],
+  "metadata": {
+    "name": "BattleMaster",
+    "icon": "/app/icons/ico.png", 
+    "description": "BattleMasters is an exciting online fantasy game where players compete in battles.",
+    "screenshots": [
+      "/app/screenshots/screen.png"
+    ]
+  },
+  "modules": [
+    {
+      "name": "openjdk",
+      "buildsystem": "simple",
+      "build-commands": [
+        "tar -xzf jdk-17.0.12_linux-x64_bin.tar.gz -C /app"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "jdk-17.0.12_linux-x64_bin.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "battlemaster",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -D battlemaster-1.0.0.jar /app/bin/battlemaster.jar",
+        "install -D battlemaster.sh /app/bin/battlemaster.sh",
+		"install -D ico.png /app/icons/ico.png",
+        "install -D screen.png /app/screenshots/screen.png",
+        "chmod +x /app/bin/battlemaster.sh"
+      ],
+      "sources": [
+        {
+          "type": "file",
+          "path": "battlemaster-1.0.0.jar"
+        },
+        {
+          "type": "file",
+          "path": "battlemaster.sh"
+        },
+        {
+          "type": "file",
+          "path": "jdk-17.0.12_linux-x64_bin.tar.gz"
+        },
+        {
+          "type": "file",
+          "path": "ico.png"
+        },
+        {
+          "type": "file",
+          "path": "screen.png"
+        }
+      ]
+    }
+	
+  ]
+}
